@@ -1,0 +1,21 @@
+name: export-cyber-angel
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  export:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download exact production file
+        run: |
+          curl -L --fail --retry 3 -o cyber-angel-bg.html https://raw.githubusercontent.com/GanaLD/mensagem-studio-portfolio/main/assets/cyber-angel-bg.html
+          test -s cyber-angel-bg.html
+          wc -c cyber-angel-bg.html
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cyber-angel-bg
+          path: cyber-angel-bg.html
+          retention-days: 1
